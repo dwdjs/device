@@ -1,0 +1,40 @@
+{
+  "name": "@deepjs/detect.js",
+  "version": "0.0.1",
+  "description": "设备环境侦测",
+  "main": "lib/index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "jest": {
+    "verbose": true,
+    "notify": true,
+    "collectCoverage": true,
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwdjs/device.git"
+  },
+  "keywords": [
+    "device",
+    "detect",
+    "browser",
+    "mobile"
+  ],
+  "author": "cloudyan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dwdjs/device/issues"
+  },
+  "homepage": "https://github.com/dwdjs/device#readme",
+  "devDependencies": {
+    "babel-jest": "^24.8.0",
+    "jest": "^24.8.0"
+  }
+}
