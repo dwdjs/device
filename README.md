@@ -2,7 +2,9 @@
 
 设备环境侦测
 
-思考：怎么才能更好的组合使用，又良好支持扩展？
+第一版，基于 [zepto.js 的 detect](https://github.com/madrobby/zepto/blob/master/src/detect.js) 扩展实现(`@dwdjs/utils/lib/device`)，作为独立包，每次新增 ua 判断要发布新包
+
+思考：怎么才能更好的组合使用，又良好支持扩展？于是规划第二版如下
 
 分析使用场景
 
@@ -17,7 +19,7 @@
 
 ## 设计
 
-最终期望输出
+期望输出不变，大致如下
 
 ```js
 device: {
@@ -69,6 +71,8 @@ debug
 
 ## 使用
 
+尽量简洁，同时支持变更、新增 ua 侦测规则
+
 ```js
 import { device } from '@dwdjs/device'
 
@@ -83,7 +87,28 @@ export {
 }
 ```
 
+## 匹配规则
+
+匹配按照此规范实施：https://github.com/ua-parser/uap-core/blob/master/docs/specification.md，举例如下
+
+```yaml
+# 针对 ua
+User-Agent: Mozilla/5.0 (Windows; Windows NT 5.1; rv:2.0b3pre) Gecko/20100727 Minefield/4.0.1pre
+
+# 应用匹配
+# $1:family $2:major $3:minor $4:patch $5:patchMinor
+- regex: '(Namoroka|Shiretoko|Minefield)/(\d+)\.(\d+)\.(\d+(?:pre)?)'
+  family_replacement: 'Firefox ($1)'
+
+# 输出
+family: Firefox (Minefield)
+major : 4
+minor : 0
+patch : 1pre
+```
+
 ## 其他
+
 
 ### 关于内核
 
@@ -94,3 +119,8 @@ export {
 - Presto内核：（说变就变）Opera 13年之后弃用，加入谷歌阵营
 - Blink内核：（闪亮）Chrome28+ Opera15+ V8
 
+参考：
+
+- https://github.com/rguerreiro/device
+- https://github.com/darcyclarke/Detect.js
+- https://github.com/matthewhudson/current-device

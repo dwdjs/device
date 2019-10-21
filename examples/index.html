@@ -10,9 +10,9 @@
   body { color: #737373; background-color: #f0f0f0; }
   html,body,#app { height: 100vh; }
   #app { display: flex; justify-content: center; align-items: center; }
+  .device{ width: 500px; margin: auto; }
+  .ua { font-size: 12px; }
   .content {
-    width: 500px;
-    margin: auto;
     padding: 12px 32px 24px 32px;
     border: 1px solid #b3b3b3;
     border-radius: 4px;
@@ -20,34 +20,59 @@
     background-image: -webkit-radial-gradient(50% 35%, ellipse cover, #FAF7F7, #fffde8 100%);
     background-image: radial-gradient(50% 35%, ellipse cover, #FAF7F7, #fffde8 100%);
   }
-  footer { text-align: center; margin: 20px auto; }
+  footer { font-size: 12px; text-align: center; margin: 20px auto; }
   </style>
 </head>
 <body>
   <div id="app">
-    <article class="device">
-      <header><h1>@dwdjs/device 设备侦测</h1></header>
-      <div class="content">
-        <h2>platform 硬件平台</h2>
-        <span>品牌型号: iphone 6s</span>
-        <h2>type 设备类型</h2>
-        <span>手机/平板/桌面</span>
-        <h2>os 操作系统</h2>
-        <span>ios/android/windows/mac</span>
-        <h2>runtime 运行时</h2>
-        <span>wechat/alipay/qq/dingtalk/hsq/iqg</span>
-      </div>
-      <footer>
-        Download <a href="https://github.com/dwdjs/device">@dwdjs/device on Github</a>
-        UI design by <a href="https://github.com/matthewhudson/current-device" rel="noopener noreferrer" target="_blank">Matthew Hudson</a>
-      </footer>
-    </article>
+
   </div>
   <script type="module">
     import { device } from '../src/index.js'
 
     const ua = navigator.userAgent
-    console.log(device.parse(ua))
+    const data = device.parse(ua)
+    console.log(data)
+
+    const html = `
+<article class="device">
+  <header><h1>@dwdjs/device 设备侦测</h1></header>
+  <p class="ua">${data.input}</p>
+  <div class="content">
+    <h2>platform 硬件平台</h2>
+    <span>品牌型号: ${data.os.family}</span>
+    <h2>type 设备类型</h2>
+    <span>${data.os.type}</span>
+    <h2>os 操作系统</h2>
+    <span>${data.os.name}</span>
+    <h2>runtime 运行时</h2>
+    <span>${data.runtime.name || 'browser'}</span>
+  </div>
+  <footer>
+    Download <a href="https://github.com/dwdjs/device">@dwdjs/device on Github</a>
+    UI design by <a href="https://github.com/matthewhudson/current-device" rel="noopener noreferrer" target="_blank">Matthew Hudson</a>
+  </footer>
+</article>
+  `;
+    document.getElementById('app').innerHTML = html
+
+/*
+
+<header><h1>@dwdjs/device 设备侦测</h1></header>
+<p class="desc">ua</p>
+<div class="content">
+  <h2>platform 硬件平台</h2>
+  <span>品牌型号: iphone 6s</span>
+  <h2>type 设备类型</h2>
+  <span>手机/平板/桌面</span>
+  <h2>os 操作系统</h2>
+  <span>ios/android/windows/mac</span>
+  <h2>runtime 运行时</h2>
+  <span>wechat/alipay/qq/dingtalk/hsq/iqg</span>
+</div>
+
+*/
+
   </script>
 </body>
 </html>

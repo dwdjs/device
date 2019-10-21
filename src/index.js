@@ -64,6 +64,7 @@ export class Device {
       if (key === 'os') {
         const os = result[key].name
         result[key].isHandle = handleDevice.includes(os)
+        result[key].type = 'desktop'
       }
     })
     this.result = result
@@ -76,5 +77,5 @@ export const device = new Device({
   // os: [], // 也支持传入规则或写个方法更改默认规则
   // os(rules) {}, // 直接修改规则
   browser: true,
-  runtime: false, // 默认 false，自己定制
+  runtime: true,
 })

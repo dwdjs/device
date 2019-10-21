@@ -1,12 +1,20 @@
 
+export function isUnDef(v) {
+  return v === 'undefined' || v === null;
+}
+
+export function isDef(v) {
+  return v !== 'undefined' && v !== null;
+}
+
 export function toVersionString(obj = {}) {
   let version = '';
   obj = obj || {};
-  if (obj.major) {
+  if (isDef(obj.major)) {
     version += obj.major;
-    if (obj.minor) {
+    if (isDef(obj.minor)) {
       version = version + '.' + obj.minor;
-      if (obj.patch) {
+      if (isDef(obj.patch)) {
         version = version + '.' + obj.patch;
       }
     }
@@ -24,15 +32,16 @@ export function parse(rules, input) {
   return temp
 }
 
+// https://github.com/ua-parser/uap-core/blob/master/docs/specification.md
 // https://github.com/darcyclarke/Detect.js/blob/master/detect.js
 export function parser(rule, text) {
+  const ret = { name: 'other' }
   const m = text.match(rule.test)
-  if (!m) return null;
+  if (!m) return {};
   const rep = rule.replacement
 
-  const ret = {}
-  ret.name = rule.value;
-  ret.detail = (rep ? rep.replace('$1', m[1]) : m[1]) || 'other';
+  ret.name = m[1];
+  ret.family = (rep ? rep.replace('$1', m[1]) : m[1]) || 'other';
   // 判断版本
   ret.major = parseInt(m[2]) || null;
   ret.minor = m[3] ? parseInt(m[3]) : null;
