@@ -5,6 +5,7 @@
 
 // pc
 export const pc = {
+  "Windows 10": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36 Edge/12.0",
   "safari 5.1 – MAC": "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50",
   "safari 5.1 – Windows": "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50",
   "IE 9.0": "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0;",
@@ -188,7 +189,9 @@ Mozilla/4.0 (compatible; MSIE 6.0; ) Opera/UCWEB7.0.2.37/28/999
 // - UC Opera User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; ) Opera/UCWEB7.0.2.37/28/999
 // UC浏览器的判断标准是”UCWEB“字段，UCWEB后面的数字为版本号。
 
-
+// UC 浏览器 User-Agent 格式
+// https://blog.csdn.net/longzh_cn/article/details/14452675
+Company/Version (Platform; Encryption; OS Version; Language; Device) Rendering Engine/Version (Rendering Details) Product/Version UC Platform/Version Extensions
 
 
 // http://tools.jb51.net/table/useragent
